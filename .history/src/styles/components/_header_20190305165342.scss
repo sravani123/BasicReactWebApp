@@ -1,0 +1,5 @@
+.collapse.navbar-collapse ul.navbar-nav li.nav-item a.nav-link.is-active{
+    color: $light-blue !important;
+    background-color: transparent;
+    border-bottom: 4px solid $light-blue;
+}

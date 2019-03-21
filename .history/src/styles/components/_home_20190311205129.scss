@@ -1,0 +1,24 @@
+Card.Img{
+    height: 160px;
+    width: 100%;
+}
+.carousel-item{
+    min-height: 400px;
+  }
+  
+  .item img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      min-height: 300px;
+  }
+  .spacer-small{
+      margin: 3.2rem;
+  }
+  .btn-shedule-service{
+      margin-bottom: 5rem;
+  }
+  .select-service{
+      margin:10px 0;
+  }
+  
