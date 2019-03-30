@@ -42,9 +42,26 @@ import {
       marginTop: theme.spacing.unit * 2,
     },
   });
-const CarousalTemplate = (props) =>  (
-
-
+const CarousalTemplate = (props) =>  {
+  const {
+    serviceRequest: {
+      name,
+      email,
+      mobileNumber,
+      address,
+      landMark,
+      selectedService,
+      selectedDate,
+      selectedTime,
+  },
+  handleShow,
+  handleClose,
+  handleSubmit,
+  DateFnsUtils,
+   handleInput,
+   open 
+  } = props;
+  return (
    <div>
     <Carousel>
     <Carousel.Item>
@@ -54,7 +71,7 @@ const CarousalTemplate = (props) =>  (
         alt="First slide"
       />
      <div className="carousel-caption d-none d-md-block">
-    <button type="button" className="btn btn-success btn-shedule-service"  onClick={props.handleShow}>Shedule pickup </button>
+    <button type="button" className="btn btn-success btn-shedule-service"  onClick={handleShow}>Shedule pickup </button>
     </div>
     </Carousel.Item>
     <Carousel.Item>
@@ -64,7 +81,7 @@ const CarousalTemplate = (props) =>  (
         alt="Second slide"
       />
   <div className="carousel-caption d-none d-md-block">
-    <button type="button" className="btn btn-success btn-shedule-service"  onClick={props.handleShow}>Shedule pickup</button>
+    <button type="button" className="btn btn-success btn-shedule-service"  onClick={handleShow}>Shedule pickup</button>
     </div>
      
     </Carousel.Item>
@@ -75,7 +92,7 @@ const CarousalTemplate = (props) =>  (
         alt="Third slide"
       />
   <div className="carousel-caption d-none d-md-block">
-    <button type="button" className="btn btn-success btn-shedule-service"  onClick={props.handleShow}>Shedule pickup</button>
+    <button type="button" className="btn btn-success btn-shedule-service"  onClick={handleShow}>Shedule pickup</button>
     </div>
     
     </Carousel.Item>
@@ -86,15 +103,15 @@ const CarousalTemplate = (props) =>  (
         alt="Third slide"
       />
   <div className="carousel-caption d-none d-md-block">
-    <button type="button" className="btn btn-success btn-shedule-service"  onClick={props.handleShow}>Shedule pickup</button>
+    <button type="button" className="btn btn-success btn-shedule-service"  onClick={handleShow}>Shedule pickup</button>
     </div>
     </Carousel.Item>
   </Carousel>
   <MuiThemeProvider muiTheme={getMuiTheme()}>
 
   <Dialog
-            open={props.open}
-            onClose={props.handleClose}
+            open={open}
+            onClose={handleClose}
             aria-labelledby="form-dialog-title"
           >
             <DialogTitle id="form-dialog-title">Submit a pickup request</DialogTitle>
@@ -110,8 +127,8 @@ const CarousalTemplate = (props) =>  (
                 margin="dense"
                 id="name"
                 label="Name"
-                value = {props.name}
-                onChange={props.handleChange}
+                value = {name}
+                onChange={event => handleInput(event, "name")}
                 type="text"
                 fullWidth
               />
@@ -121,8 +138,8 @@ const CarousalTemplate = (props) =>  (
                 id="emailId"
                 label="Email Address"
                 type="email"
-                value= {props.email}
-                onChange={props.handleChange}
+                value= {email}
+                onChange={event => handleInput(event, "email")}
 
                 fullWidth
               />
@@ -132,80 +149,73 @@ const CarousalTemplate = (props) =>  (
                 id="mobile-number"
                 label="Mobile number"
                 type="number"
-                onChange={props.handleChange}
+                onChange={event => handleInput(event, "mobileNumber")}
 
-                value ={props.mobileNumber}
+                value ={mobileNumber}
                 fullWidth
               />
            <FormControl required fullWidth className="formControl">
            <InputLabel htmlFor="service-required">Selected Service</InputLabel>
           <Select
-            value={props.selectedService}
-            onChange={props.handleSelectChange}
+            value={selectedService || ''}
+            onChange={event => handleInput(event, "selectedService")}
+            displayEmpty
             inputProps={{
               name: 'selectedService',
-              // id: 'age-required',
+             
             }}
           >
-            <MenuItem value="">
+            {/* <MenuItem value="">
               <em>None</em>
-            </MenuItem>
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
+            </MenuItem> */}
+            <MenuItem value="Dry Cleaning">Dry Cleaning</MenuItem>
+            <MenuItem value="Washing and Ironing">Washing and Ironing</MenuItem>
+            <MenuItem value="Rolling">Rolling</MenuItem>
           </Select>
           <FormHelperText>Required</FormHelperText>
         </FormControl>
        
-            <MuiPickersUtilsProvider utils={props.DateFnsUtils}>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <div className="date-time-pickers">
             
             <DatePicker
             className = "date-picker"
-            value={props.selectedDate}
-            onChange={props.handleDateChange}
+            value={selectedDate}
+            onChange={event => handleInput(event, "selectedDate")}
           />
-            <TimePicker className = "time-picker" value={props.selectedTime} onChange={props.handleTimeChange} />           
+            <TimePicker className = "time-picker" value={selectedTime} onChange={event => handleInput(event, "selectedTime")}
+ />           
              </div>
           </MuiPickersUtilsProvider>
           <TextField
                 autoFocus
                 margin="dense"
-                id="address-one"
-                label="Address Line 1 "
-                onChange={props.handleChange}
-
+                id="address"
+                label="Address"
+                value = {address}
+                onChange={event => handleInput(event, "address")}
                 type="text"
                 fullWidth
               />
-                <TextField
-                autoFocus
-                margin="dense"
-                id="address-two"
-                label="Address Line 2 "
-                onChange={props.handleChange}
-
-                type="text"
-                fullWidth
-              />
-                <TextField
+               
+                {/* <TextField
                 autoFocus
                 margin="dense"
                 id="landmark"
                 label="Landmark"
-                onChange={props.handleChange}
-
+                onChange={event => handleInput(event, "landmark")}
+                value ={landMark}
                 type="text"
                 fullWidth
-              />
+              /> */}
               </form>
             </DialogContent>
             <DialogActions>
            
-              <Button onClick={props.handleClose} color="primary">
+              <Button onClick={handleClose} color="primary">
                 Cancel
               </Button>
-              <ProgressButton extendClick = {props.handleSubmit} />
+              <ProgressButton extendClick = {handleSubmit} />
               {/* <Button onClick={props.handleSubmit} color="primary">
                 Submit
               </Button> */}
@@ -275,5 +285,6 @@ const CarousalTemplate = (props) =>  (
    
     
   )
+}
                      
 export default CarousalTemplate;
