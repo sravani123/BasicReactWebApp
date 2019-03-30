@@ -57,7 +57,6 @@ class CircularIntegration extends React.Component {
               console.log('Timer is running');
               this.props.extendClick();
             this.setState({
-            
               loading: false,
               success: true,
             });
