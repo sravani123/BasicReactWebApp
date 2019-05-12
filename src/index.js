@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import * as serviceWorker from './serviceWorker';
 import AppRouter from './AppRouter';
-import Hello from './components/Common/Calendar/Hello';
 ReactDOM.render(<AppRouter />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

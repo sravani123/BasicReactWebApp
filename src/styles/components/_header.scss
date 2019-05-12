@@ -3,6 +3,33 @@
     background-color: transparent;
     border-bottom: 4px solid lightblue;
 }
-// .fixed-top  {
-// background-color: !important;
-// } 
+.navbar-brand {
+    font-family: 'Bad Script';
+    font-size:30px;
+    font-weight: 800;
+   
+    // color: #0000ff;
+   
+        color: #4177f4 !important;
+    
+}
+.navbar-light .navbar-nav .nav-link {
+        color:#4177f4;
+    }
+
+@include media-breakpoint-up(xs) {
+.navbar-brand{
+    margin-left: 10px;
+}
+}
+@include media-breakpoint-up(sm) {
+    .navbar-brand{
+        margin-left: 15px;
+    }
+    }
+    @include media-breakpoint-up(md) {
+        .navbar-brand{
+            margin-left: 30px;
+        }
+        }
+

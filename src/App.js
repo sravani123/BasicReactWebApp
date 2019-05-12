@@ -19,8 +19,8 @@ console.log(req.data);
 });
 
 
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
+app.listen(4000, () => {
+  console.log("Server running on port 4000");
  });
  
 
@@ -28,21 +28,35 @@ app.listen(5000, () => {
    console.log("============");
    console.log(req.body);
    const name = req.body.name;
-   const email =  req.body.email;
+   const toEmail = "dhobiboylaundry@gmail.com";
    const message=  req.body.message;
+   const fromEmail = req.body.email;
   //  const {name, email, message} = req.body; 
    console.log('message======'+message);
    var mailOptions = {
-    from: 'scheripa@tibco.com',
-    to: email,
-    subject: `Shedulue Request from ${name} `,
-    text: message
+    from: fromEmail,
+    to: toEmail,
+    subject: `Shedule Request from ${name} `,
+    text: `You have got a service request from the name : ${message}`
   };
+  var SheduleMailOption = {
+    from: 'shedule@dhobiboy.com',
+    to: fromEmail,
+    subject: `Your request has been confirmed with Dhobi Boy !!! `,
+    text: `Your request has been confirmed, Our agent will get back to you soon... \n ${message}`
+  }
   var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'scheripa@tibco.com',
-      pass: 'Techv1@3'
+      user: 'dhobiboylaundry@gmail.com',
+      pass: 'kingmaker'
+    }
+  });
+  var sheduleMailTransporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'shedule@dhobiboy.com',
+      pass: 'shedule12335'
     }
   });
   // client.messages.create({
@@ -54,7 +68,17 @@ app.listen(5000, () => {
     if (error) {
       console.log("errro===="+error);
     } else {
-
+      console.log("mainl sent successsfully");
+      console.log(info);
+      sheduleMailTransporter.sendMail(SheduleMailOption, function(error, info){
+        if (error) {
+          console.log("errro===="+error);
+        }else{
+          console.log("mainl sent successsfully from shedulue");
+      console.log(info);
+          console.log("message sent from shedlue also");
+        }
+      });
       console.log('Email sent: ' + info.response);
     }
   });
